@@ -1,5 +1,5 @@
 {
-  "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts": {
+  "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts": {
     "versionSfCore": null,
     "versionFramework": "4.1.11",
     "isWithinCompose": false,
@@ -7,7 +7,7 @@
     "composeOrgName": null,
     "composeResolverProviders": {},
     "composeServiceName": null,
-    "servicePath": "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts",
+    "servicePath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "service": "api-tts",
@@ -194,7 +194,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
                 },
                 "Handler": "handler.health",
                 "Runtime": "python3.9",
@@ -219,7 +219,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
                 },
                 "Handler": "handler.v1_description",
                 "Runtime": "python3.9",
@@ -244,7 +244,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
                 },
                 "Handler": "handler.post",
                 "Runtime": "python3.9",
@@ -262,34 +262,34 @@
                 "PostLogGroup"
               ]
             },
-            "HealthLambdaVersionPASgN2IAu35zAEOszKf0zQK7rnoXSJBMNf3pC5lhhrE": {
+            "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "HealthLambdaFunction"
                 },
-                "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
+                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
               }
             },
-            "V1DescriptionLambdaVersionEu9rTQfAu8WdXsFCLakGyZULw57akaYU6OKLLMpoq0": {
+            "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "V1DescriptionLambdaFunction"
                 },
-                "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
+                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
               }
             },
-            "PostLambdaVersion2GGDxaRFRwZ3A92mUhX7lQiC9SDLiGQUvmscwwpjPA": {
+            "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "PostLambdaFunction"
                 },
-                "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
+                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
               }
             },
             "HttpApi": {
@@ -550,7 +550,7 @@
             "HealthLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "HealthLambdaVersionPASgN2IAu35zAEOszKf0zQK7rnoXSJBMNf3pC5lhhrE"
+                "Ref": "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -559,7 +559,7 @@
             "V1DescriptionLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "V1DescriptionLambdaVersionEu9rTQfAu8WdXsFCLakGyZULw57akaYU6OKLLMpoq0"
+                "Ref": "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -568,7 +568,7 @@
             "PostLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "PostLambdaVersion2GGDxaRFRwZ3A92mUhX7lQiC9SDLiGQUvmscwwpjPA"
+                "Ref": "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -713,7 +713,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "HealthLambdaVersionPASgN2IAu35zAEOszKf0zQK7rnoXSJBMNf3pC5lhhrE"
+          "versionLogicalId": "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y"
         },
         "v1Description": {
           "handler": "handler.v1_description",
@@ -733,7 +733,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "V1DescriptionLambdaVersionEu9rTQfAu8WdXsFCLakGyZULw57akaYU6OKLLMpoq0"
+          "versionLogicalId": "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA"
         },
         "post": {
           "handler": "handler.post",
@@ -753,7 +753,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "PostLambdaVersion2GGDxaRFRwZ3A92mUhX7lQiC9SDLiGQUvmscwwpjPA"
+          "versionLogicalId": "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo"
         }
       }
     },
@@ -764,12 +764,12 @@
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "90915832820eb82c923450de44818fdc",
+    "machineId": "7f72a37ae36c2be5cfddb049c83fcd97",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
-    "orgId": "28cc9eaa-1dc8-4856-927c-0ae91f5abfe7",
-    "orgName": "josejaan",
-    "userId": "qHXQHJwM9XWrDpsZ3s",
+    "orgId": "c3a15f3f-c3c8-4ce8-820c-8c2826a65f21",
+    "orgName": "rafarez",
+    "userId": "S3Y9FSPhJDQlWv8knM",
     "dashboard": {
       "isEnabledForService": false,
       "requiredAuthentication": false,
@@ -779,50 +779,50 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "userName": "josejaan",
+    "userName": "rafarez",
     "subscription": null,
-    "userEmail": "joseacerbialmeidaneto@hotmail.com",
+    "userEmail": "rafaelrez2004@gmail.com",
     "serviceProviderAwsCredentials": "<REDACTED>",
-    "serviceProviderAwsAccountId": "891377158070",
+    "serviceProviderAwsAccountId": "767398027208",
     "versionSf": "4.1.11",
     "serviceProviderAwsCfStackName": "api-tts-dev",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:891377158070:stack/api-tts-dev/3adcb4b0-3959-11ef-8b52-0e947989e88d",
-    "serviceProviderAwsCfStackCreated": "2024-07-03T16:28:07.498Z",
-    "serviceProviderAwsCfStackUpdated": "2024-07-04T14:35:40.360Z",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:767398027208:stack/api-tts-dev/cb0ae990-3958-11ef-989b-0e33e87dfa09",
+    "serviceProviderAwsCfStackCreated": "2024-07-03T16:24:59.904Z",
+    "serviceProviderAwsCfStackUpdated": "2024-07-04T16:49:50.023Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "PostLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-post:3",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-post:2",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "V1DescriptionLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-v1Description:4",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-v1Description:4",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HealthLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-health:4",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-health:5",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
-        "OutputValue": "s9uqg4t7c9",
+        "OutputValue": "mjdefqob66",
         "Description": "Id of the HTTP API",
         "ExportName": "sls-api-tts-dev-HttpApiId"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
-        "OutputValue": "api-tts-dev-serverlessdeploymentbucket-0qipbbre5l3k",
+        "OutputValue": "api-tts-dev-serverlessdeploymentbucket-vglzbzpdo2hy",
         "ExportName": "sls-api-tts-dev-ServerlessDeploymentBucketName"
       },
       {
         "OutputKey": "HttpApiUrl",
-        "OutputValue": "https://s9uqg4t7c9.execute-api.us-east-1.amazonaws.com",
+        "OutputValue": "https://mjdefqob66.execute-api.us-east-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-api-tts-dev-HttpApiUrl"
       }
