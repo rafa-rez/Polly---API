@@ -5,18 +5,2626 @@
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
-    "composeResolverProviders": {},
+    "composeResolverProviders": {
+      "env": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "api-tts",
+            "frameworkVersion": "4.1.10",
+            "plugins": [
+              "serverless-dotenv-plugin"
+            ],
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.9",
+              "region": "us-east-1",
+              "environment": {
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+              },
+              "iamRoleStatements": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem",
+                    "dynamodb:Scan",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                }
+              ],
+              "stage": "dev",
+              "versionFunctions": true,
+              "compiledCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-health"
+                    }
+                  },
+                  "V1DescriptionLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-v1Description"
+                    }
+                  },
+                  "PostLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-post"
+                    }
+                  },
+                  "IamRoleLambdaExecution": {
+                    "Type": "AWS::IAM::Role",
+                    "Properties": {
+                      "AssumeRolePolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                          {
+                            "Effect": "Allow",
+                            "Principal": {
+                              "Service": [
+                                "lambda.amazonaws.com"
+                              ]
+                            },
+                            "Action": [
+                              "sts:AssumeRole"
+                            ]
+                          }
+                        ]
+                      },
+                      "Policies": [
+                        {
+                          "PolicyName": {
+                            "Fn::Join": [
+                              "-",
+                              [
+                                "api-tts",
+                                "dev",
+                                "lambda"
+                              ]
+                            ]
+                          },
+                          "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:CreateLogStream",
+                                  "logs:CreateLogGroup",
+                                  "logs:TagResource"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:PutLogEvents"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "dynamodb:PutItem",
+                                  "dynamodb:GetItem",
+                                  "dynamodb:Scan",
+                                  "dynamodb:UpdateItem",
+                                  "dynamodb:DeleteItem"
+                                ],
+                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "Path": "/",
+                      "RoleName": {
+                        "Fn::Join": [
+                          "-",
+                          [
+                            "api-tts",
+                            "dev",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            "lambdaRole"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.health",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-health",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "HealthLogGroup"
+                    ]
+                  },
+                  "V1DescriptionLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.v1_description",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-v1Description",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "V1DescriptionLogGroup"
+                    ]
+                  },
+                  "PostLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.post",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-post",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "PostLogGroup"
+                    ]
+                  },
+                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "HealthLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "V1DescriptionLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "PostLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "HttpApi": {
+                    "Type": "AWS::ApiGatewayV2::Api",
+                    "Properties": {
+                      "Name": "dev-api-tts",
+                      "ProtocolType": "HTTP"
+                    }
+                  },
+                  "HttpApiStage": {
+                    "Type": "AWS::ApiGatewayV2::Stage",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "StageName": "$default",
+                      "AutoDeploy": true,
+                      "DefaultRouteSettings": {
+                        "DetailedMetricsEnabled": false
+                      }
+                    }
+                  },
+                  "HealthLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationHealth": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGet": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationHealth"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationHealth"
+                  },
+                  "V1DescriptionLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationV1Description": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetV1": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /v1",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationV1Description"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationV1Description"
+                  },
+                  "PostLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationPost": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePostV1Tts": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "POST /v1/tts",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationPost"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationPost"
+                  },
+                  "CustomerTable": {
+                    "Type": "AWS::DynamoDB::Table",
+                    "Properties": {
+                      "AttributeDefinitions": [
+                        {
+                          "AttributeName": "primary_key",
+                          "AttributeType": "S"
+                        }
+                      ],
+                      "BillingMode": "PAY_PER_REQUEST",
+                      "KeySchema": [
+                        {
+                          "AttributeName": "primary_key",
+                          "KeyType": "HASH"
+                        }
+                      ],
+                      "TableName": "api-tts-customerTable-dev"
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-ServerlessDeploymentBucketName"
+                    }
+                  },
+                  "HealthLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "V1DescriptionLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "PostLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "HttpApiId": {
+                    "Description": "Id of the HTTP API",
+                    "Value": {
+                      "Ref": "HttpApi"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiId"
+                    }
+                  },
+                  "HttpApiUrl": {
+                    "Description": "URL of the HTTP API",
+                    "Value": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "https://",
+                          {
+                            "Ref": "HttpApi"
+                          },
+                          ".execute-api.",
+                          {
+                            "Ref": "AWS::Region"
+                          },
+                          ".",
+                          {
+                            "Ref": "AWS::URLSuffix"
+                          }
+                        ]
+                      ]
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiUrl"
+                    }
+                  }
+                }
+              },
+              "coreCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    }
+                  }
+                }
+              },
+              "vpc": {}
+            },
+            "functions": {
+              "health": {
+                "handler": "handler.health",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/"
+                  }
+                ],
+                "name": "api-tts-dev-health",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+              },
+              "v1Description": {
+                "handler": "handler.v1_description",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/v1"
+                  }
+                ],
+                "name": "api-tts-dev-v1Description",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+              },
+              "post": {
+                "handler": "handler.post",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1/tts",
+                      "method": "post"
+                    },
+                    "resolvedMethod": "POST",
+                    "resolvedPath": "/v1/tts"
+                  }
+                ],
+                "name": "api-tts-dev-post",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+              }
+            },
+            "resources": {
+              "Resources": {
+                "CustomerTable": {
+                  "Type": "AWS::DynamoDB::Table",
+                  "Properties": {
+                    "AttributeDefinitions": [
+                      {
+                        "AttributeName": "primary_key",
+                        "AttributeType": "S"
+                      }
+                    ],
+                    "BillingMode": "PAY_PER_REQUEST",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "primary_key",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "TableName": "api-tts-customerTable-dev"
+                  }
+                }
+              },
+              "Outputs": {}
+            },
+            "custom": {
+              "dotenv": {
+                "path": ".env"
+              }
+            }
+          },
+          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "config": {
+            "type": "env"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null
+        },
+        "resolvers": {}
+      },
+      "self": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "api-tts",
+            "frameworkVersion": "4.1.10",
+            "plugins": [
+              "serverless-dotenv-plugin"
+            ],
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.9",
+              "region": "us-east-1",
+              "environment": {
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+              },
+              "iamRoleStatements": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem",
+                    "dynamodb:Scan",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                }
+              ],
+              "stage": "dev",
+              "versionFunctions": true,
+              "compiledCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-health"
+                    }
+                  },
+                  "V1DescriptionLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-v1Description"
+                    }
+                  },
+                  "PostLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-post"
+                    }
+                  },
+                  "IamRoleLambdaExecution": {
+                    "Type": "AWS::IAM::Role",
+                    "Properties": {
+                      "AssumeRolePolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                          {
+                            "Effect": "Allow",
+                            "Principal": {
+                              "Service": [
+                                "lambda.amazonaws.com"
+                              ]
+                            },
+                            "Action": [
+                              "sts:AssumeRole"
+                            ]
+                          }
+                        ]
+                      },
+                      "Policies": [
+                        {
+                          "PolicyName": {
+                            "Fn::Join": [
+                              "-",
+                              [
+                                "api-tts",
+                                "dev",
+                                "lambda"
+                              ]
+                            ]
+                          },
+                          "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:CreateLogStream",
+                                  "logs:CreateLogGroup",
+                                  "logs:TagResource"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:PutLogEvents"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "dynamodb:PutItem",
+                                  "dynamodb:GetItem",
+                                  "dynamodb:Scan",
+                                  "dynamodb:UpdateItem",
+                                  "dynamodb:DeleteItem"
+                                ],
+                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "Path": "/",
+                      "RoleName": {
+                        "Fn::Join": [
+                          "-",
+                          [
+                            "api-tts",
+                            "dev",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            "lambdaRole"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.health",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-health",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "HealthLogGroup"
+                    ]
+                  },
+                  "V1DescriptionLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.v1_description",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-v1Description",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "V1DescriptionLogGroup"
+                    ]
+                  },
+                  "PostLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.post",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-post",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "PostLogGroup"
+                    ]
+                  },
+                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "HealthLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "V1DescriptionLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "PostLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "HttpApi": {
+                    "Type": "AWS::ApiGatewayV2::Api",
+                    "Properties": {
+                      "Name": "dev-api-tts",
+                      "ProtocolType": "HTTP"
+                    }
+                  },
+                  "HttpApiStage": {
+                    "Type": "AWS::ApiGatewayV2::Stage",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "StageName": "$default",
+                      "AutoDeploy": true,
+                      "DefaultRouteSettings": {
+                        "DetailedMetricsEnabled": false
+                      }
+                    }
+                  },
+                  "HealthLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationHealth": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGet": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationHealth"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationHealth"
+                  },
+                  "V1DescriptionLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationV1Description": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetV1": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /v1",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationV1Description"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationV1Description"
+                  },
+                  "PostLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationPost": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePostV1Tts": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "POST /v1/tts",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationPost"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationPost"
+                  },
+                  "CustomerTable": {
+                    "Type": "AWS::DynamoDB::Table",
+                    "Properties": {
+                      "AttributeDefinitions": [
+                        {
+                          "AttributeName": "primary_key",
+                          "AttributeType": "S"
+                        }
+                      ],
+                      "BillingMode": "PAY_PER_REQUEST",
+                      "KeySchema": [
+                        {
+                          "AttributeName": "primary_key",
+                          "KeyType": "HASH"
+                        }
+                      ],
+                      "TableName": "api-tts-customerTable-dev"
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-ServerlessDeploymentBucketName"
+                    }
+                  },
+                  "HealthLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "V1DescriptionLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "PostLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "HttpApiId": {
+                    "Description": "Id of the HTTP API",
+                    "Value": {
+                      "Ref": "HttpApi"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiId"
+                    }
+                  },
+                  "HttpApiUrl": {
+                    "Description": "URL of the HTTP API",
+                    "Value": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "https://",
+                          {
+                            "Ref": "HttpApi"
+                          },
+                          ".execute-api.",
+                          {
+                            "Ref": "AWS::Region"
+                          },
+                          ".",
+                          {
+                            "Ref": "AWS::URLSuffix"
+                          }
+                        ]
+                      ]
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiUrl"
+                    }
+                  }
+                }
+              },
+              "coreCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    }
+                  }
+                }
+              },
+              "vpc": {}
+            },
+            "functions": {
+              "health": {
+                "handler": "handler.health",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/"
+                  }
+                ],
+                "name": "api-tts-dev-health",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+              },
+              "v1Description": {
+                "handler": "handler.v1_description",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/v1"
+                  }
+                ],
+                "name": "api-tts-dev-v1Description",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+              },
+              "post": {
+                "handler": "handler.post",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1/tts",
+                      "method": "post"
+                    },
+                    "resolvedMethod": "POST",
+                    "resolvedPath": "/v1/tts"
+                  }
+                ],
+                "name": "api-tts-dev-post",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+              }
+            },
+            "resources": {
+              "Resources": {
+                "CustomerTable": {
+                  "Type": "AWS::DynamoDB::Table",
+                  "Properties": {
+                    "AttributeDefinitions": [
+                      {
+                        "AttributeName": "primary_key",
+                        "AttributeType": "S"
+                      }
+                    ],
+                    "BillingMode": "PAY_PER_REQUEST",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "primary_key",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "TableName": "api-tts-customerTable-dev"
+                  }
+                }
+              },
+              "Outputs": {}
+            },
+            "custom": {
+              "dotenv": {
+                "path": ".env"
+              }
+            }
+          },
+          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "config": {
+            "type": "self"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null
+        },
+        "resolvers": {}
+      },
+      "sls": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "api-tts",
+            "frameworkVersion": "4.1.10",
+            "plugins": [
+              "serverless-dotenv-plugin"
+            ],
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.9",
+              "region": "us-east-1",
+              "environment": {
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+              },
+              "iamRoleStatements": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem",
+                    "dynamodb:Scan",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                }
+              ],
+              "stage": "dev",
+              "versionFunctions": true,
+              "compiledCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-health"
+                    }
+                  },
+                  "V1DescriptionLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-v1Description"
+                    }
+                  },
+                  "PostLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/api-tts-dev-post"
+                    }
+                  },
+                  "IamRoleLambdaExecution": {
+                    "Type": "AWS::IAM::Role",
+                    "Properties": {
+                      "AssumeRolePolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                          {
+                            "Effect": "Allow",
+                            "Principal": {
+                              "Service": [
+                                "lambda.amazonaws.com"
+                              ]
+                            },
+                            "Action": [
+                              "sts:AssumeRole"
+                            ]
+                          }
+                        ]
+                      },
+                      "Policies": [
+                        {
+                          "PolicyName": {
+                            "Fn::Join": [
+                              "-",
+                              [
+                                "api-tts",
+                                "dev",
+                                "lambda"
+                              ]
+                            ]
+                          },
+                          "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:CreateLogStream",
+                                  "logs:CreateLogGroup",
+                                  "logs:TagResource"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "logs:PutLogEvents"
+                                ],
+                                "Resource": [
+                                  {
+                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*:*"
+                                  }
+                                ]
+                              },
+                              {
+                                "Effect": "Allow",
+                                "Action": [
+                                  "dynamodb:PutItem",
+                                  "dynamodb:GetItem",
+                                  "dynamodb:Scan",
+                                  "dynamodb:UpdateItem",
+                                  "dynamodb:DeleteItem"
+                                ],
+                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "Path": "/",
+                      "RoleName": {
+                        "Fn::Join": [
+                          "-",
+                          [
+                            "api-tts",
+                            "dev",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            "lambdaRole"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HealthLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.health",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-health",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "HealthLogGroup"
+                    ]
+                  },
+                  "V1DescriptionLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.v1_description",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-v1Description",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "V1DescriptionLogGroup"
+                    ]
+                  },
+                  "PostLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": {
+                          "Ref": "ServerlessDeploymentBucket"
+                        },
+                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                      },
+                      "Handler": "handler.post",
+                      "Runtime": "python3.9",
+                      "FunctionName": "api-tts-dev-post",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Environment": {
+                        "Variables": {
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                        }
+                      },
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "PostLogGroup"
+                    ]
+                  },
+                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "HealthLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "V1DescriptionLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "PostLambdaFunction"
+                      },
+                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                    }
+                  },
+                  "HttpApi": {
+                    "Type": "AWS::ApiGatewayV2::Api",
+                    "Properties": {
+                      "Name": "dev-api-tts",
+                      "ProtocolType": "HTTP"
+                    }
+                  },
+                  "HttpApiStage": {
+                    "Type": "AWS::ApiGatewayV2::Stage",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "StageName": "$default",
+                      "AutoDeploy": true,
+                      "DefaultRouteSettings": {
+                        "DetailedMetricsEnabled": false
+                      }
+                    }
+                  },
+                  "HealthLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationHealth": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "HealthLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGet": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationHealth"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationHealth"
+                  },
+                  "V1DescriptionLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationV1Description": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "V1DescriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetV1": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /v1",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationV1Description"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationV1Description"
+                  },
+                  "PostLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationPost": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "PostLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePostV1Tts": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "POST /v1/tts",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationPost"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationPost"
+                  },
+                  "CustomerTable": {
+                    "Type": "AWS::DynamoDB::Table",
+                    "Properties": {
+                      "AttributeDefinitions": [
+                        {
+                          "AttributeName": "primary_key",
+                          "AttributeType": "S"
+                        }
+                      ],
+                      "BillingMode": "PAY_PER_REQUEST",
+                      "KeySchema": [
+                        {
+                          "AttributeName": "primary_key",
+                          "KeyType": "HASH"
+                        }
+                      ],
+                      "TableName": "api-tts-customerTable-dev"
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-ServerlessDeploymentBucketName"
+                    }
+                  },
+                  "HealthLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "V1DescriptionLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "PostLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "HttpApiId": {
+                    "Description": "Id of the HTTP API",
+                    "Value": {
+                      "Ref": "HttpApi"
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiId"
+                    }
+                  },
+                  "HttpApiUrl": {
+                    "Description": "URL of the HTTP API",
+                    "Value": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "https://",
+                          {
+                            "Ref": "HttpApi"
+                          },
+                          ".execute-api.",
+                          {
+                            "Ref": "AWS::Region"
+                          },
+                          ".",
+                          {
+                            "Ref": "AWS::URLSuffix"
+                          }
+                        ]
+                      ]
+                    },
+                    "Export": {
+                      "Name": "sls-api-tts-dev-HttpApiUrl"
+                    }
+                  }
+                }
+              },
+              "coreCloudFormationTemplate": {
+                "AWSTemplateFormatVersion": "2010-09-09",
+                "Description": "The AWS CloudFormation template for this Serverless application",
+                "Resources": {
+                  "ServerlessDeploymentBucket": {
+                    "Type": "AWS::S3::Bucket",
+                    "Properties": {
+                      "BucketEncryption": {
+                        "ServerSideEncryptionConfiguration": [
+                          {
+                            "ServerSideEncryptionByDefault": {
+                              "SSEAlgorithm": "AES256"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "ServerlessDeploymentBucketPolicy": {
+                    "Type": "AWS::S3::BucketPolicy",
+                    "Properties": {
+                      "Bucket": {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "PolicyDocument": {
+                        "Statement": [
+                          {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":s3:::",
+                                    {
+                                      "Ref": "ServerlessDeploymentBucket"
+                                    }
+                                  ]
+                                ]
+                              }
+                            ],
+                            "Condition": {
+                              "Bool": {
+                                "aws:SecureTransport": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "Outputs": {
+                  "ServerlessDeploymentBucketName": {
+                    "Value": {
+                      "Ref": "ServerlessDeploymentBucket"
+                    }
+                  }
+                }
+              },
+              "vpc": {}
+            },
+            "functions": {
+              "health": {
+                "handler": "handler.health",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/"
+                  }
+                ],
+                "name": "api-tts-dev-health",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+              },
+              "v1Description": {
+                "handler": "handler.v1_description",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1",
+                      "method": "get"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/v1"
+                  }
+                ],
+                "name": "api-tts-dev-v1Description",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+              },
+              "post": {
+                "handler": "handler.post",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/v1/tts",
+                      "method": "post"
+                    },
+                    "resolvedMethod": "POST",
+                    "resolvedPath": "/v1/tts"
+                  }
+                ],
+                "name": "api-tts-dev-post",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "python3.9",
+                "vpc": {},
+                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+              }
+            },
+            "resources": {
+              "Resources": {
+                "CustomerTable": {
+                  "Type": "AWS::DynamoDB::Table",
+                  "Properties": {
+                    "AttributeDefinitions": [
+                      {
+                        "AttributeName": "primary_key",
+                        "AttributeType": "S"
+                      }
+                    ],
+                    "BillingMode": "PAY_PER_REQUEST",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "primary_key",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "TableName": "api-tts-customerTable-dev"
+                  }
+                }
+              },
+              "Outputs": {}
+            },
+            "custom": {
+              "dotenv": {
+                "path": ".env"
+              }
+            }
+          },
+          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "config": {
+            "type": "sls"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null
+        },
+        "resolvers": {}
+      }
+    },
     "composeServiceName": null,
     "servicePath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "service": "api-tts",
       "frameworkVersion": "4.1.10",
+      "plugins": [
+        "serverless-dotenv-plugin"
+      ],
       "provider": {
         "name": "aws",
         "runtime": "python3.9",
-        "stage": "dev",
         "region": "us-east-1",
+        "environment": {
+          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:PutItem",
+              "dynamodb:GetItem",
+              "dynamodb:Scan",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+          }
+        ],
+        "stage": "dev",
         "versionFunctions": true,
         "compiledCloudFormationTemplate": {
           "AWSTemplateFormatVersion": "2010-09-09",
@@ -166,6 +2774,17 @@
                               "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*:*"
                             }
                           ]
+                        },
+                        {
+                          "Effect": "Allow",
+                          "Action": [
+                            "dynamodb:PutItem",
+                            "dynamodb:GetItem",
+                            "dynamodb:Scan",
+                            "dynamodb:UpdateItem",
+                            "dynamodb:DeleteItem"
+                          ],
+                          "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
                         }
                       ]
                     }
@@ -194,13 +2813,20 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
                 },
                 "Handler": "handler.health",
                 "Runtime": "python3.9",
                 "FunctionName": "api-tts-dev-health",
                 "MemorySize": 1024,
                 "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                  }
+                },
                 "Role": {
                   "Fn::GetAtt": [
                     "IamRoleLambdaExecution",
@@ -219,13 +2845,20 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
                 },
                 "Handler": "handler.v1_description",
                 "Runtime": "python3.9",
                 "FunctionName": "api-tts-dev-v1Description",
                 "MemorySize": 1024,
                 "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                  }
+                },
                 "Role": {
                   "Fn::GetAtt": [
                     "IamRoleLambdaExecution",
@@ -244,13 +2877,20 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
                 },
                 "Handler": "handler.post",
                 "Runtime": "python3.9",
                 "FunctionName": "api-tts-dev-post",
                 "MemorySize": 1024,
                 "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                  }
+                },
                 "Role": {
                   "Fn::GetAtt": [
                     "IamRoleLambdaExecution",
@@ -262,34 +2902,34 @@
                 "PostLogGroup"
               ]
             },
-            "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y": {
+            "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "HealthLambdaFunction"
                 },
-                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
               }
             },
-            "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA": {
+            "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "V1DescriptionLambdaFunction"
                 },
-                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
               }
             },
-            "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo": {
+            "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "PostLambdaFunction"
                 },
-                "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
               }
             },
             "HttpApi": {
@@ -536,6 +3176,25 @@
                 }
               },
               "DependsOn": "HttpApiIntegrationPost"
+            },
+            "CustomerTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "primary_key",
+                    "AttributeType": "S"
+                  }
+                ],
+                "BillingMode": "PAY_PER_REQUEST",
+                "KeySchema": [
+                  {
+                    "AttributeName": "primary_key",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "TableName": "api-tts-customerTable-dev"
+              }
             }
           },
           "Outputs": {
@@ -550,7 +3209,7 @@
             "HealthLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y"
+                "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -559,7 +3218,7 @@
             "V1DescriptionLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA"
+                "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -568,7 +3227,7 @@
             "PostLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo"
+                "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -713,7 +3372,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y"
+          "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
         },
         "v1Description": {
           "handler": "handler.v1_description",
@@ -733,7 +3392,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA"
+          "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
         },
         "post": {
           "handler": "handler.post",
@@ -753,11 +3412,40 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo"
+          "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+        }
+      },
+      "resources": {
+        "Resources": {
+          "CustomerTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "primary_key",
+                  "AttributeType": "S"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST",
+              "KeySchema": [
+                {
+                  "AttributeName": "primary_key",
+                  "KeyType": "HASH"
+                }
+              ],
+              "TableName": "api-tts-customerTable-dev"
+            }
+          }
+        },
+        "Outputs": {}
+      },
+      "custom": {
+        "dotenv": {
+          "path": ".env"
         }
       }
     },
-    "serviceRawFile": "service: api-tts\r\nframeworkVersion: '4.1.10'\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n\r\nfunctions:\r\n  health:\r\n    handler: handler.health\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: get\r\n  v1Description:\r\n    handler: handler.v1_description\r\n    events:\r\n      - httpApi:\r\n          path: /v1\r\n          method: get\r\n  post:\r\n    handler: handler.post\r\n    events:\r\n      - httpApi:\r\n          path: /v1/tts\r\n          method: post\r\n\r\n",
+    "serviceRawFile": "service: api-tts\r\nframeworkVersion: '4.1.10'\r\n\r\nplugins:\r\n  - serverless-dotenv-plugin\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n  region: us-east-1\r\n  environment:\r\n    DYNAMODB_CUSTOMER_TABLE: ${env:DYNAMOTABLENAME}  \r\n\r\n  iamRoleStatements:\r\n    - Effect: \"Allow\"\r\n      Action:\r\n        - 'dynamodb:PutItem'\r\n        - 'dynamodb:GetItem'\r\n        - 'dynamodb:Scan'\r\n        - 'dynamodb:UpdateItem'\r\n        - 'dynamodb:DeleteItem'\r\n      Resource: \r\n        - ${env:DYNAMOTABLEARN}  \r\n\r\nfunctions:\r\n  health:\r\n    handler: handler.health\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: get\r\n  v1Description:\r\n    handler: handler.v1_description\r\n    events:\r\n      - httpApi:\r\n          path: /v1\r\n          method: get\r\n  post:\r\n    handler: handler.post\r\n    events:\r\n      - httpApi:\r\n          path: /v1/tts\r\n          method: post\r\n\r\nresources:\r\n  Resources:\r\n    CustomerTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        AttributeDefinitions:\r\n          - AttributeName: primary_key\r\n            AttributeType: S\r\n        BillingMode: PAY_PER_REQUEST\r\n        KeySchema:\r\n          - AttributeName: primary_key\r\n            KeyType: HASH\r\n        TableName: ${self:service}-customerTable-${sls:stage}  \r\n\r\ncustom:\r\n  dotenv:\r\n    path: .env\r\n",
     "command": [
       "deploy"
     ],
@@ -788,24 +3476,24 @@
     "serviceProviderAwsCfStackName": "api-tts-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:767398027208:stack/api-tts-dev/cb0ae990-3958-11ef-989b-0e33e87dfa09",
     "serviceProviderAwsCfStackCreated": "2024-07-03T16:24:59.904Z",
-    "serviceProviderAwsCfStackUpdated": "2024-07-04T16:49:50.023Z",
+    "serviceProviderAwsCfStackUpdated": "2024-07-04T18:13:00.192Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "PostLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-post:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-post:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "V1DescriptionLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-v1Description:4",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-v1Description:11",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HealthLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-health:5",
+        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-health:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
       },

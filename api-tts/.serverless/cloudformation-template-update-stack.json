@@ -146,6 +146,17 @@
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-tts-dev*:*:*"
                     }
                   ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem",
+                    "dynamodb:Scan",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
                 }
               ]
             }
@@ -174,13 +185,20 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
         },
         "Handler": "handler.health",
         "Runtime": "python3.9",
         "FunctionName": "api-tts-dev-health",
         "MemorySize": 1024,
         "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+            "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+            "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -199,13 +217,20 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
         },
         "Handler": "handler.v1_description",
         "Runtime": "python3.9",
         "FunctionName": "api-tts-dev-v1Description",
         "MemorySize": 1024,
         "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+            "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+            "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -224,13 +249,20 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720111782583-2024-07-04T16:49:42.583Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
         },
         "Handler": "handler.post",
         "Runtime": "python3.9",
         "FunctionName": "api-tts-dev-post",
         "MemorySize": 1024,
         "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
+            "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
+            "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -242,34 +274,34 @@
         "PostLogGroup"
       ]
     },
-    "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y": {
+    "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthLambdaFunction"
         },
-        "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+        "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
       }
     },
-    "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA": {
+    "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "V1DescriptionLambdaFunction"
         },
-        "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+        "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
       }
     },
-    "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo": {
+    "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostLambdaFunction"
         },
-        "CodeSha256": "G1xnEdT0vyVkok6twXh5MOIGENG9fBqJAav/RhhA4CA="
+        "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
       }
     },
     "HttpApi": {
@@ -516,6 +548,25 @@
         }
       },
       "DependsOn": "HttpApiIntegrationPost"
+    },
+    "CustomerTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "primary_key",
+            "AttributeType": "S"
+          }
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "primary_key",
+            "KeyType": "HASH"
+          }
+        ],
+        "TableName": "api-tts-customerTable-dev"
+      }
     }
   },
   "Outputs": {
@@ -530,7 +581,7 @@
     "HealthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthLambdaVersionFAdbbXfGW26GFnk8CH3COsk2yJu9B789W35HuSo3Y"
+        "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
       },
       "Export": {
         "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -539,7 +590,7 @@
     "V1DescriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "V1DescriptionLambdaVersion9xbjwE2m4s73YaBzfwjCyL5nU96DvDsYCsL8DezRpYA"
+        "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
       },
       "Export": {
         "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -548,7 +599,7 @@
     "PostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostLambdaVersion2B0II88hci23vF2a78uSRouQxRaagOzdrDYC50ixAo"
+        "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
       },
       "Export": {
         "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
