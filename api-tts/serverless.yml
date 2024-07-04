@@ -54,7 +54,7 @@ resources:
         KeySchema:
           - AttributeName: primary_key
             KeyType: HASH
-        TableName: ${self:service}-customerTable-${sls:stage}  
+        TableName: ${self:service}-pollyPhrases-${sls:stage}  
 
 custom:
   dotenv:

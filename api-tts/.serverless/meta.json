@@ -1,5 +1,5 @@
 {
-  "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts": {
+  "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts": {
     "versionSfCore": null,
     "versionFramework": "4.1.11",
     "isWithinCompose": false,
@@ -20,9 +20,9 @@
               "runtime": "python3.9",
               "region": "us-east-1",
               "environment": {
-                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
               },
               "iamRoleStatements": [
                 {
@@ -34,7 +34,7 @@
                     "dynamodb:UpdateItem",
                     "dynamodb:DeleteItem"
                   ],
-                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                  "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                 }
               ],
               "stage": "dev",
@@ -197,7 +197,7 @@
                                   "dynamodb:UpdateItem",
                                   "dynamodb:DeleteItem"
                                 ],
-                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                                "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                               }
                             ]
                           }
@@ -226,7 +226,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.health",
                       "Runtime": "python3.9",
@@ -235,9 +235,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -258,7 +258,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.v1_description",
                       "Runtime": "python3.9",
@@ -267,9 +267,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -290,7 +290,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.post",
                       "Runtime": "python3.9",
@@ -299,9 +299,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -315,34 +315,34 @@
                       "PostLogGroup"
                     ]
                   },
-                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                  "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "HealthLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                  "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "V1DescriptionLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                  "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "PostLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
                   "HttpApi": {
@@ -606,7 +606,7 @@
                           "KeyType": "HASH"
                         }
                       ],
-                      "TableName": "api-tts-customerTable-dev"
+                      "TableName": "api-tts-pollyPhrases-dev"
                     }
                   }
                 },
@@ -622,7 +622,7 @@
                   "HealthLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                      "Ref": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -631,7 +631,7 @@
                   "V1DescriptionLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                      "Ref": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -640,7 +640,7 @@
                   "PostLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                      "Ref": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -785,7 +785,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                "versionLogicalId": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
               },
               "v1Description": {
                 "handler": "handler.v1_description",
@@ -805,7 +805,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                "versionLogicalId": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
               },
               "post": {
                 "handler": "handler.post",
@@ -825,7 +825,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                "versionLogicalId": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
               }
             },
             "resources": {
@@ -846,7 +846,7 @@
                         "KeyType": "HASH"
                       }
                     ],
-                    "TableName": "api-tts-customerTable-dev"
+                    "TableName": "api-tts-pollyPhrases-dev"
                   }
                 }
               },
@@ -858,7 +858,7 @@
               }
             }
           },
-          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "configFileDirPath": "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts",
           "config": {
             "type": "env"
           },
@@ -882,9 +882,9 @@
               "runtime": "python3.9",
               "region": "us-east-1",
               "environment": {
-                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
               },
               "iamRoleStatements": [
                 {
@@ -896,7 +896,7 @@
                     "dynamodb:UpdateItem",
                     "dynamodb:DeleteItem"
                   ],
-                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                  "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                 }
               ],
               "stage": "dev",
@@ -1059,7 +1059,7 @@
                                   "dynamodb:UpdateItem",
                                   "dynamodb:DeleteItem"
                                 ],
-                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                                "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                               }
                             ]
                           }
@@ -1088,7 +1088,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.health",
                       "Runtime": "python3.9",
@@ -1097,9 +1097,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -1120,7 +1120,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.v1_description",
                       "Runtime": "python3.9",
@@ -1129,9 +1129,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -1152,7 +1152,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.post",
                       "Runtime": "python3.9",
@@ -1161,9 +1161,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -1177,34 +1177,34 @@
                       "PostLogGroup"
                     ]
                   },
-                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                  "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "HealthLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                  "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "V1DescriptionLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                  "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "PostLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
                   "HttpApi": {
@@ -1468,7 +1468,7 @@
                           "KeyType": "HASH"
                         }
                       ],
-                      "TableName": "api-tts-customerTable-dev"
+                      "TableName": "api-tts-pollyPhrases-dev"
                     }
                   }
                 },
@@ -1484,7 +1484,7 @@
                   "HealthLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                      "Ref": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -1493,7 +1493,7 @@
                   "V1DescriptionLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                      "Ref": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -1502,7 +1502,7 @@
                   "PostLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                      "Ref": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -1647,7 +1647,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                "versionLogicalId": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
               },
               "v1Description": {
                 "handler": "handler.v1_description",
@@ -1667,7 +1667,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                "versionLogicalId": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
               },
               "post": {
                 "handler": "handler.post",
@@ -1687,7 +1687,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                "versionLogicalId": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
               }
             },
             "resources": {
@@ -1708,7 +1708,7 @@
                         "KeyType": "HASH"
                       }
                     ],
-                    "TableName": "api-tts-customerTable-dev"
+                    "TableName": "api-tts-pollyPhrases-dev"
                   }
                 }
               },
@@ -1720,7 +1720,7 @@
               }
             }
           },
-          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "configFileDirPath": "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts",
           "config": {
             "type": "self"
           },
@@ -1744,9 +1744,9 @@
               "runtime": "python3.9",
               "region": "us-east-1",
               "environment": {
-                "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
               },
               "iamRoleStatements": [
                 {
@@ -1758,7 +1758,7 @@
                     "dynamodb:UpdateItem",
                     "dynamodb:DeleteItem"
                   ],
-                  "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                  "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                 }
               ],
               "stage": "dev",
@@ -1921,7 +1921,7 @@
                                   "dynamodb:UpdateItem",
                                   "dynamodb:DeleteItem"
                                 ],
-                                "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                                "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                               }
                             ]
                           }
@@ -1950,7 +1950,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.health",
                       "Runtime": "python3.9",
@@ -1959,9 +1959,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -1982,7 +1982,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.v1_description",
                       "Runtime": "python3.9",
@@ -1991,9 +1991,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -2014,7 +2014,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                        "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                       },
                       "Handler": "handler.post",
                       "Runtime": "python3.9",
@@ -2023,9 +2023,9 @@
                       "Timeout": 6,
                       "Environment": {
                         "Variables": {
-                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       },
                       "Role": {
@@ -2039,34 +2039,34 @@
                       "PostLogGroup"
                     ]
                   },
-                  "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+                  "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "HealthLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+                  "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "V1DescriptionLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
-                  "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+                  "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "PostLambdaFunction"
                       },
-                      "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                      "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
                     }
                   },
                   "HttpApi": {
@@ -2330,7 +2330,7 @@
                           "KeyType": "HASH"
                         }
                       ],
-                      "TableName": "api-tts-customerTable-dev"
+                      "TableName": "api-tts-pollyPhrases-dev"
                     }
                   }
                 },
@@ -2346,7 +2346,7 @@
                   "HealthLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                      "Ref": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -2355,7 +2355,7 @@
                   "V1DescriptionLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                      "Ref": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -2364,7 +2364,7 @@
                   "PostLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                      "Ref": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
                     },
                     "Export": {
                       "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -2509,7 +2509,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                "versionLogicalId": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
               },
               "v1Description": {
                 "handler": "handler.v1_description",
@@ -2529,7 +2529,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                "versionLogicalId": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
               },
               "post": {
                 "handler": "handler.post",
@@ -2549,7 +2549,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                "versionLogicalId": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
               }
             },
             "resources": {
@@ -2570,7 +2570,7 @@
                         "KeyType": "HASH"
                       }
                     ],
-                    "TableName": "api-tts-customerTable-dev"
+                    "TableName": "api-tts-pollyPhrases-dev"
                   }
                 }
               },
@@ -2582,7 +2582,7 @@
               }
             }
           },
-          "configFileDirPath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+          "configFileDirPath": "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts",
           "config": {
             "type": "sls"
           },
@@ -2594,7 +2594,7 @@
       }
     },
     "composeServiceName": null,
-    "servicePath": "C:\\Users\\Rafae\\Desktop\\Sprints\\sprint-6-7\\sprints-6-7-pb-aws-abril\\api-tts",
+    "servicePath": "E:\\ComputerScience\\Compass\\ProjetoSprint6&7\\sprints-6-7-pb-aws-abril\\api-tts",
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "service": "api-tts",
@@ -2607,9 +2607,9 @@
         "runtime": "python3.9",
         "region": "us-east-1",
         "environment": {
-          "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-          "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-          "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+          "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+          "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+          "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
         },
         "iamRoleStatements": [
           {
@@ -2621,7 +2621,7 @@
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem"
             ],
-            "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+            "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
           }
         ],
         "stage": "dev",
@@ -2784,7 +2784,7 @@
                             "dynamodb:UpdateItem",
                             "dynamodb:DeleteItem"
                           ],
-                          "Resource": "arn:aws:dynamodb:us-east-1:*:table/api-tts-customerTable-dev"
+                          "Resource": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                         }
                       ]
                     }
@@ -2813,7 +2813,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                 },
                 "Handler": "handler.health",
                 "Runtime": "python3.9",
@@ -2822,9 +2822,9 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                   }
                 },
                 "Role": {
@@ -2845,7 +2845,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                 },
                 "Handler": "handler.v1_description",
                 "Runtime": "python3.9",
@@ -2854,9 +2854,9 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                   }
                 },
                 "Role": {
@@ -2877,7 +2877,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/api-tts/dev/1720116772967-2024-07-04T18:12:52.967Z/api-tts.zip"
+                  "S3Key": "serverless/api-tts/dev/1720119985453-2024-07-04T19:06:25.453Z/api-tts.zip"
                 },
                 "Handler": "handler.post",
                 "Runtime": "python3.9",
@@ -2886,9 +2886,9 @@
                 "Timeout": 6,
                 "Environment": {
                   "Variables": {
-                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-customerTable-dev",
-                    "DYNAMOTABLENAME": "api-tts-customerTable-:stage}",
-                    "DYNAMOTABLEARN": "arn:aws:dynamodb::provider.region}:*:table/:service}-customerTable-:stage}"
+                    "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
+                    "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
                   }
                 },
                 "Role": {
@@ -2902,34 +2902,34 @@
                 "PostLogGroup"
               ]
             },
-            "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE": {
+            "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "HealthLambdaFunction"
                 },
-                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
               }
             },
-            "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw": {
+            "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "V1DescriptionLambdaFunction"
                 },
-                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
               }
             },
-            "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc": {
+            "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "PostLambdaFunction"
                 },
-                "CodeSha256": "mOVNzOmv19T7PM7JyXeG9vXi81NU2g6EDl4x8FDo4wk="
+                "CodeSha256": "73czbRNLMuUXXkaZJc1pxSt6BVXBLy1pdDPWpkVsGbI="
               }
             },
             "HttpApi": {
@@ -3193,7 +3193,7 @@
                     "KeyType": "HASH"
                   }
                 ],
-                "TableName": "api-tts-customerTable-dev"
+                "TableName": "api-tts-pollyPhrases-dev"
               }
             }
           },
@@ -3209,7 +3209,7 @@
             "HealthLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+                "Ref": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -3218,7 +3218,7 @@
             "V1DescriptionLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+                "Ref": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -3227,7 +3227,7 @@
             "PostLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+                "Ref": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
               },
               "Export": {
                 "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
@@ -3372,7 +3372,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "HealthLambdaVersionXThdggUMEJG4MVxgAvLVys4ss618s4sf2HnbNKPbKE"
+          "versionLogicalId": "HealthLambdaVersionr3pE2e0W3lDr79JKfxR18geLUAtSCaKzXAKLPl8sxk"
         },
         "v1Description": {
           "handler": "handler.v1_description",
@@ -3392,7 +3392,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "V1DescriptionLambdaVersionAqLJEbdwwECUpygbsm76QKiZ1vtauP2bhADEDMH9ATw"
+          "versionLogicalId": "V1DescriptionLambdaVersionqEL8i1gah26TBU2jl1QXHc3rY6WuHD9OyhIftHoJck"
         },
         "post": {
           "handler": "handler.post",
@@ -3412,7 +3412,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "PostLambdaVersionkdUgoW7WqLlUz4JlZnhUVR7bzLfRkO0om3yq2aYgTc"
+          "versionLogicalId": "PostLambdaVersionOJeSqvWvZPKY0sniDwdrocRinPxYKI53VcO2mkl4T8"
         }
       },
       "resources": {
@@ -3433,7 +3433,7 @@
                   "KeyType": "HASH"
                 }
               ],
-              "TableName": "api-tts-customerTable-dev"
+              "TableName": "api-tts-pollyPhrases-dev"
             }
           }
         },
@@ -3445,19 +3445,19 @@
         }
       }
     },
-    "serviceRawFile": "service: api-tts\r\nframeworkVersion: '4.1.10'\r\n\r\nplugins:\r\n  - serverless-dotenv-plugin\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n  region: us-east-1\r\n  environment:\r\n    DYNAMODB_CUSTOMER_TABLE: ${env:DYNAMOTABLENAME}  \r\n\r\n  iamRoleStatements:\r\n    - Effect: \"Allow\"\r\n      Action:\r\n        - 'dynamodb:PutItem'\r\n        - 'dynamodb:GetItem'\r\n        - 'dynamodb:Scan'\r\n        - 'dynamodb:UpdateItem'\r\n        - 'dynamodb:DeleteItem'\r\n      Resource: \r\n        - ${env:DYNAMOTABLEARN}  \r\n\r\nfunctions:\r\n  health:\r\n    handler: handler.health\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: get\r\n  v1Description:\r\n    handler: handler.v1_description\r\n    events:\r\n      - httpApi:\r\n          path: /v1\r\n          method: get\r\n  post:\r\n    handler: handler.post\r\n    events:\r\n      - httpApi:\r\n          path: /v1/tts\r\n          method: post\r\n\r\nresources:\r\n  Resources:\r\n    CustomerTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        AttributeDefinitions:\r\n          - AttributeName: primary_key\r\n            AttributeType: S\r\n        BillingMode: PAY_PER_REQUEST\r\n        KeySchema:\r\n          - AttributeName: primary_key\r\n            KeyType: HASH\r\n        TableName: ${self:service}-customerTable-${sls:stage}  \r\n\r\ncustom:\r\n  dotenv:\r\n    path: .env\r\n",
+    "serviceRawFile": "service: api-tts\r\nframeworkVersion: '4.1.10'\r\n\r\nplugins:\r\n  - serverless-dotenv-plugin\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n  region: us-east-1\r\n  environment:\r\n    DYNAMODB_CUSTOMER_TABLE: ${env:DYNAMOTABLENAME}  \r\n\r\n  iamRoleStatements:\r\n    - Effect: \"Allow\"\r\n      Action:\r\n        - 'dynamodb:PutItem'\r\n        - 'dynamodb:GetItem'\r\n        - 'dynamodb:Scan'\r\n        - 'dynamodb:UpdateItem'\r\n        - 'dynamodb:DeleteItem'\r\n      Resource: \r\n        - ${env:DYNAMOTABLEARN}  \r\n\r\nfunctions:\r\n  health:\r\n    handler: handler.health\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: get\r\n  v1Description:\r\n    handler: handler.v1_description\r\n    events:\r\n      - httpApi:\r\n          path: /v1\r\n          method: get\r\n  post:\r\n    handler: handler.post\r\n    events:\r\n      - httpApi:\r\n          path: /v1/tts\r\n          method: post\r\n\r\nresources:\r\n  Resources:\r\n    CustomerTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        AttributeDefinitions:\r\n          - AttributeName: primary_key\r\n            AttributeType: S\r\n        BillingMode: PAY_PER_REQUEST\r\n        KeySchema:\r\n          - AttributeName: primary_key\r\n            KeyType: HASH\r\n        TableName: ${self:service}-pollyPhrases-${sls:stage}  \r\n\r\ncustom:\r\n  dotenv:\r\n    path: .env\r\n",
     "command": [
       "deploy"
     ],
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "7f72a37ae36c2be5cfddb049c83fcd97",
+    "machineId": "90915832820eb82c923450de44818fdc",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
-    "orgId": "c3a15f3f-c3c8-4ce8-820c-8c2826a65f21",
-    "orgName": "rafarez",
-    "userId": "S3Y9FSPhJDQlWv8knM",
+    "orgId": "28cc9eaa-1dc8-4856-927c-0ae91f5abfe7",
+    "orgName": "josejaan",
+    "userId": "qHXQHJwM9XWrDpsZ3s",
     "dashboard": {
       "isEnabledForService": false,
       "requiredAuthentication": false,
@@ -3467,50 +3467,50 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "userName": "rafarez",
+    "userName": "josejaan",
     "subscription": null,
-    "userEmail": "rafaelrez2004@gmail.com",
+    "userEmail": "joseacerbialmeidaneto@hotmail.com",
     "serviceProviderAwsCredentials": "<REDACTED>",
-    "serviceProviderAwsAccountId": "767398027208",
+    "serviceProviderAwsAccountId": "891377158070",
     "versionSf": "4.1.11",
     "serviceProviderAwsCfStackName": "api-tts-dev",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:767398027208:stack/api-tts-dev/cb0ae990-3958-11ef-989b-0e33e87dfa09",
-    "serviceProviderAwsCfStackCreated": "2024-07-03T16:24:59.904Z",
-    "serviceProviderAwsCfStackUpdated": "2024-07-04T18:13:00.192Z",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:891377158070:stack/api-tts-dev/3adcb4b0-3959-11ef-8b52-0e947989e88d",
+    "serviceProviderAwsCfStackCreated": "2024-07-03T16:28:07.498Z",
+    "serviceProviderAwsCfStackUpdated": "2024-07-04T19:06:32.161Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "PostLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-post:9",
+        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-post:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "V1DescriptionLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-v1Description:11",
+        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-v1Description:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HealthLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767398027208:function:api-tts-dev-health:12",
+        "OutputValue": "arn:aws:lambda:us-east-1:891377158070:function:api-tts-dev-health:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
-        "OutputValue": "mjdefqob66",
+        "OutputValue": "s9uqg4t7c9",
         "Description": "Id of the HTTP API",
         "ExportName": "sls-api-tts-dev-HttpApiId"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
-        "OutputValue": "api-tts-dev-serverlessdeploymentbucket-vglzbzpdo2hy",
+        "OutputValue": "api-tts-dev-serverlessdeploymentbucket-0qipbbre5l3k",
         "ExportName": "sls-api-tts-dev-ServerlessDeploymentBucketName"
       },
       {
         "OutputKey": "HttpApiUrl",
-        "OutputValue": "https://mjdefqob66.execute-api.us-east-1.amazonaws.com",
+        "OutputValue": "https://s9uqg4t7c9.execute-api.us-east-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-api-tts-dev-HttpApiUrl"
       }
