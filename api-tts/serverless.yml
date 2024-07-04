@@ -18,4 +18,10 @@ functions:
       - httpApi:
           path: /v1
           method: get
+  post:
+    handler: handler.post
+    events:
+      - httpApi:
+          path: /v1/tts
+          method: post
 

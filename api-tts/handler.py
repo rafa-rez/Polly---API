@@ -19,3 +19,18 @@ def v1_description(event, context):
     response = {"statusCode": 200, "body": json.dumps(body)}
 
     return response
+
+def post(event, context):
+    body = json.loads(event.get('body', '{}'))
+    
+    phrase = body.get('phrase', '')
+
+    response_body = {
+        "message": f"Received phrase: {phrase}"
+    }
+
+    response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}
+    }
+
+    return response
+    

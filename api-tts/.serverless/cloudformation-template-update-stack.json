@@ -83,6 +83,12 @@
         "LogGroupName": "/aws/lambda/api-tts-dev-v1Description"
       }
     },
+    "PostLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/api-tts-dev-post"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -168,7 +174,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720024085811-2024-07-03T16:28:05.811Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
         },
         "Handler": "handler.health",
         "Runtime": "python3.9",
@@ -193,7 +199,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720024085811-2024-07-03T16:28:05.811Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
         },
         "Handler": "handler.v1_description",
         "Runtime": "python3.9",
@@ -211,24 +217,59 @@
         "V1DescriptionLogGroup"
       ]
     },
-    "HealthLambdaVersionip4TfLf2KtKxk6uyFCUq8BGGgDOxmcd9bzDUSdlRk": {
+    "PostLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/api-tts/dev/1720103733881-2024-07-04T14:35:33.881Z/api-tts.zip"
+        },
+        "Handler": "handler.post",
+        "Runtime": "python3.9",
+        "FunctionName": "api-tts-dev-post",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "PostLogGroup"
+      ]
+    },
+    "HealthLambdaVersionPASgN2IAu35zAEOszKf0zQK7rnoXSJBMNf3pC5lhhrE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthLambdaFunction"
         },
-        "CodeSha256": "rvD/U85426fg1d2tUC2Jc9MnVP0iJ9sNkavE+4gM2jo="
+        "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
       }
     },
-    "V1DescriptionLambdaVersionA7imZ61HJT8fuw12rLiO1QMVMcDMDyyEBD5i1qinRs": {
+    "V1DescriptionLambdaVersionEu9rTQfAu8WdXsFCLakGyZULw57akaYU6OKLLMpoq0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "V1DescriptionLambdaFunction"
         },
-        "CodeSha256": "rvD/U85426fg1d2tUC2Jc9MnVP0iJ9sNkavE+4gM2jo="
+        "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
+      }
+    },
+    "PostLambdaVersion2GGDxaRFRwZ3A92mUhX7lQiC9SDLiGQUvmscwwpjPA": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PostLambdaFunction"
+        },
+        "CodeSha256": "e9BSrToMkDw7v4hnbwgGzJ/Kulgr3PTUUlHFFBpjJr0="
       }
     },
     "HttpApi": {
@@ -400,6 +441,81 @@
         }
       },
       "DependsOn": "HttpApiIntegrationV1Description"
+    },
+    "PostLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PostLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationPost": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "PostLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRoutePostV1Tts": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "POST /v1/tts",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationPost"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationPost"
     }
   },
   "Outputs": {
@@ -414,7 +530,7 @@
     "HealthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthLambdaVersionip4TfLf2KtKxk6uyFCUq8BGGgDOxmcd9bzDUSdlRk"
+        "Ref": "HealthLambdaVersionPASgN2IAu35zAEOszKf0zQK7rnoXSJBMNf3pC5lhhrE"
       },
       "Export": {
         "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -423,10 +539,19 @@
     "V1DescriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "V1DescriptionLambdaVersionA7imZ61HJT8fuw12rLiO1QMVMcDMDyyEBD5i1qinRs"
+        "Ref": "V1DescriptionLambdaVersionEu9rTQfAu8WdXsFCLakGyZULw57akaYU6OKLLMpoq0"
       },
       "Export": {
         "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
+      }
+    },
+    "PostLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PostLambdaVersion2GGDxaRFRwZ3A92mUhX7lQiC9SDLiGQUvmscwwpjPA"
+      },
+      "Export": {
+        "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
       }
     },
     "HttpApiId": {
