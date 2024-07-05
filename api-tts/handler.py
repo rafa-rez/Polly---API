@@ -4,6 +4,7 @@ import string
 import os
 import boto3
 from botocore.exceptions import ClientError
+import hashlib
 
 dynamodb = boto3.resource('dynamodb')
 table_name = os.environ['DYNAMODB_CUSTOMER_TABLE']
@@ -28,38 +29,37 @@ def v1_description(event, context):
 
     return response
 
-def generate_id(length=5):
-    while True:
-        new_id = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-        if not id_exists(new_id):
-            return new_id
+def generate_id(string):
+    hash_object = hashlib.sha256(string.encode())
+    
+    hex_dig = hash_object.hexdigest()
 
-def id_exists(phrase_id):
-    try:
-        response = table.get_item(Key={'primary_key': phrase_id})
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-    else:
-        return 'Item' in response
+    hash_id = hex_dig[:5]
+    
+    return hash_id
 
 def post(event, context):
     body = json.loads(event.get('body', '{}'))
     
     phrase = body.get('phrase', '')
+    originalPhrase = phrase
+    phrase = phrase.lower()
     
-    existing_item = get_item_by_phrase(phrase)
+    phrase_id = generate_id(phrase)
+    
+    existing_item = get_item_by_phrase(phrase_id)
     if existing_item:
         response_body = {
-            "id": existing_item['primary_key'],
-            "message": f"Phrase already exists in the database.",
-            "phrase": existing_item['phrase']
+            "received_phrase": f"{originalPhrase}",
+            "url_to_audio": "[LINK AUDIO BUCKET]",
+            "created_audio": "[DATA CRIACAO AUDIO]",
+            "unique_id": f"{phrase_id}"
         }
 
         response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}}
 
         return response
 
-    phrase_id = generate_id()
 
     item = {
         'primary_key': phrase_id,
@@ -85,17 +85,19 @@ def post(event, context):
         return response
 
     response_body = {
-        "id": phrase_id,
-        "message": f"Received phrase: {phrase}"
+        "received_phrase": f"{originalPhrase}",
+        "url_to_audio": "[LINK AUDIO BUCKET]",
+        "created_audio": "[DATA CRIACAO AUDIO]",
+        "unique_id": f"{phrase_id}"
     }
 
     response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}}
 
     return response
 
-def get_item_by_phrase(phrase):
+def get_item_by_phrase(phrase_id):
     try:
-        response = table.scan(FilterExpression='phrase = :p',ExpressionAttributeValues={':p': phrase})
+        response = table.scan(FilterExpression='primary_key = :p',ExpressionAttributeValues={':p': phrase_id})
     except ClientError as e:
         print(e.response['Error']['Message'])
         return None
