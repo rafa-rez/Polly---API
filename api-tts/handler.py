@@ -5,6 +5,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 import hashlib
+from datetime import datetime, timedelta
 
 dynamodb = boto3.resource('dynamodb')
 table_name = os.environ['DYNAMODB_CUSTOMER_TABLE']
@@ -29,6 +30,7 @@ def v1_description(event, context):
 
     return response
 
+#Gera um hash de 5 caracteres. A mesma string sempre terá o mesmo hash
 def generate_id(string):
     hash_object = hashlib.sha256(string.encode())
     
@@ -37,6 +39,30 @@ def generate_id(string):
     hash_id = hex_dig[:5]
     
     return hash_id
+
+#Busca no banco de dados a ocorrência de um registro com o mesmo hash
+def get_item_by_phrase(phrase_id):
+    try:
+        response = table.scan(FilterExpression='primary_key = :p',ExpressionAttributeValues={':p': phrase_id})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return None
+    else:
+        items = response.get('Items', [])
+        if items:
+            return items[0]
+        else:
+            return None
+
+#Coleta a data atual para armazenar junto com o registro no bando de dados        
+def get_current_datetime():
+    nowGMT = datetime.now()
+
+    #Ajustar para fuso horário de brasília
+    nowGMTMinus3 = nowGMT - timedelta(hours=3)
+
+    formatted_datetime = nowGMTMinus3.strftime('%d-%m-%Y %H:%M:%S')
+    return formatted_datetime
 
 def post(event, context):
     body = json.loads(event.get('body', '{}'))
@@ -52,16 +78,18 @@ def post(event, context):
         response_body = {
             "received_phrase": f"{originalPhrase}",
             "url_to_audio": "[LINK AUDIO BUCKET]",
-            "created_audio": "[DATA CRIACAO AUDIO]",
-            "unique_id": f"{phrase_id}"
+            "created_audio": existing_item['created_audio'],
+            "unique_id": existing_item['primary_key']
         }
 
         response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}}
 
         return response
 
+    date = get_current_datetime()
 
     item = {
+        'created_audio': date,
         'primary_key': phrase_id,
         'phrase': phrase
     }
@@ -87,7 +115,7 @@ def post(event, context):
     response_body = {
         "received_phrase": f"{originalPhrase}",
         "url_to_audio": "[LINK AUDIO BUCKET]",
-        "created_audio": "[DATA CRIACAO AUDIO]",
+        "created_audio": f"{date}",
         "unique_id": f"{phrase_id}"
     }
 
@@ -95,15 +123,4 @@ def post(event, context):
 
     return response
 
-def get_item_by_phrase(phrase_id):
-    try:
-        response = table.scan(FilterExpression='primary_key = :p',ExpressionAttributeValues={':p': phrase_id})
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-        return None
-    else:
-        items = response.get('Items', [])
-        if items:
-            return items[0]
-        else:
-            return None
+
