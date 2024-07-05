@@ -1,14 +1,15 @@
 import json
-import random
-import string
 import os
-import boto3
-from botocore.exceptions import ClientError
 import hashlib
 from datetime import datetime, timedelta
+import boto3
+from botocore.exceptions import ClientError
+from scripts.polly import generate_audio
+
 
 dynamodb = boto3.resource('dynamodb')
-table_name = os.environ['DYNAMODB_CUSTOMER_TABLE']
+table_name = os.environ['DYNAMOTABLENAME']
+s3_bucket_name = os.environ['S3BUCKETNAME']
 table = dynamodb.Table(table_name)
 
 def health(event, context):
@@ -41,7 +42,7 @@ def generate_id(string):
     return hash_id
 
 #Busca no banco de dados a ocorrência de um registro com o mesmo hash
-def get_item_by_phrase(phrase_id):
+def get_item_by_id(phrase_id):
     try:
         response = table.scan(FilterExpression='primary_key = :p',ExpressionAttributeValues={':p': phrase_id})
     except ClientError as e:
@@ -53,8 +54,8 @@ def get_item_by_phrase(phrase_id):
             return items[0]
         else:
             return None
-
-#Coleta a data atual para armazenar junto com o registro no bando de dados        
+             
+#Coleta a data atual para armazenar junto com o registro no banco de dados          
 def get_current_datetime():
     nowGMT = datetime.now()
 
@@ -73,27 +74,27 @@ def post(event, context):
     
     phrase_id = generate_id(phrase)
     
-    existing_item = get_item_by_phrase(phrase_id)
+    existing_item = get_item_by_id(phrase_id)   
     if existing_item:
         response_body = {
             "received_phrase": f"{originalPhrase}",
-            "url_to_audio": "[LINK AUDIO BUCKET]",
+            "url_to_audio": existing_item['url_to_audio'],
             "created_audio": existing_item['created_audio'],
             "unique_id": existing_item['primary_key']
         }
-
-        response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}}
-
+        response = {"statusCode": 200, "body": json.dumps(response_body), "headers": {"Content-Type": "application/json"}}
         return response
 
     date = get_current_datetime()
+    s3_audio_url = generate_audio(phrase, phrase_id)
 
     item = {
         'created_audio': date,
         'primary_key': phrase_id,
-        'phrase': phrase
+        'phrase': phrase,
+        'url_to_audio': s3_audio_url
     }
-
+    
     try:
         table.put_item(Item=item)
     except ClientError as e:
@@ -104,8 +105,8 @@ def post(event, context):
             "error": error_message
         }
         response = {
-            "statusCode": 500,
-            "body": json.dumps(response_body),
+            "statusCode": 500, 
+            "body": json.dumps(response_body), 
             "headers": {
                 "Content-Type": "application/json"
             }
@@ -114,13 +115,11 @@ def post(event, context):
 
     response_body = {
         "received_phrase": f"{originalPhrase}",
-        "url_to_audio": "[LINK AUDIO BUCKET]",
+        "url_to_audio": s3_audio_url,
         "created_audio": f"{date}",
         "unique_id": f"{phrase_id}"
     }
 
-    response = {"statusCode": 200,"body": json.dumps(response_body),"headers": {"Content-Type": "application/json"}}
-
+    response = {"statusCode": 200, "body": json.dumps(response_body), "headers": {"Content-Type": "application/json"}}
     return response
-
-
+    

@@ -185,7 +185,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720202700192-2024-07-05T18:05:00.192Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720215260705-2024-07-05T21:34:20.705Z/api-tts.zip"
         },
         "Handler": "handler.health",
         "Runtime": "python3.9",
@@ -196,7 +196,8 @@
           "Variables": {
             "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
             "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
-            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
+            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev",
+            "S3BUCKETNAME": "audios-sprint-6-7"
           }
         },
         "Role": {
@@ -217,7 +218,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720202700192-2024-07-05T18:05:00.192Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720215260705-2024-07-05T21:34:20.705Z/api-tts.zip"
         },
         "Handler": "handler.v1_description",
         "Runtime": "python3.9",
@@ -228,7 +229,8 @@
           "Variables": {
             "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
             "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
-            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
+            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev",
+            "S3BUCKETNAME": "audios-sprint-6-7"
           }
         },
         "Role": {
@@ -249,7 +251,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-tts/dev/1720202700192-2024-07-05T18:05:00.192Z/api-tts.zip"
+          "S3Key": "serverless/api-tts/dev/1720215260705-2024-07-05T21:34:20.705Z/api-tts.zip"
         },
         "Handler": "handler.post",
         "Runtime": "python3.9",
@@ -260,7 +262,8 @@
           "Variables": {
             "DYNAMODB_CUSTOMER_TABLE": "api-tts-pollyPhrases-dev",
             "DYNAMOTABLENAME": "api-tts-pollyPhrases-dev",
-            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev"
+            "DYNAMOTABLEARN": "arn:aws:dynamodb:us-east-1:891377158070:table/api-tts-pollyPhrases-dev",
+            "S3BUCKETNAME": "audios-sprint-6-7"
           }
         },
         "Role": {
@@ -274,34 +277,34 @@
         "PostLogGroup"
       ]
     },
-    "HealthLambdaVersionuuJCcSYoH6UiTnhv35bxq3MYViATSCgWtGiEns5UIo": {
+    "HealthLambdaVersionEx7KPIFD18vIMMSg2l1L2Z1qwQCvsRoOoSQd1CwAAE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthLambdaFunction"
         },
-        "CodeSha256": "6KeaKz6rkJc/4wyJOvfvnweSw/hvhXnZr1960n394yk="
+        "CodeSha256": "4h/hT3H35JrBFo3qfjzVZSbU5OGYcAnsxEMlkRgk8oA="
       }
     },
-    "V1DescriptionLambdaVersion0dd1ajbZHvYPWrK3R7Qyeyv0YoRwW9AQIN5nuIhc": {
+    "V1DescriptionLambdaVersionI59IIqdZgHiQnoFVOfz8WknRqbJSifOzaMZymPpeYY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "V1DescriptionLambdaFunction"
         },
-        "CodeSha256": "6KeaKz6rkJc/4wyJOvfvnweSw/hvhXnZr1960n394yk="
+        "CodeSha256": "4h/hT3H35JrBFo3qfjzVZSbU5OGYcAnsxEMlkRgk8oA="
       }
     },
-    "PostLambdaVersionT2bCko2d3ezHnH8AHQirynSYuy9mz0fc9alyo2mvgE": {
+    "PostLambdaVersionoOV6n3IX07mkjo4j7lKMBAHcyDPKR9nXHj7c6BduM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostLambdaFunction"
         },
-        "CodeSha256": "6KeaKz6rkJc/4wyJOvfvnweSw/hvhXnZr1960n394yk="
+        "CodeSha256": "4h/hT3H35JrBFo3qfjzVZSbU5OGYcAnsxEMlkRgk8oA="
       }
     },
     "HttpApi": {
@@ -581,7 +584,7 @@
     "HealthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthLambdaVersionuuJCcSYoH6UiTnhv35bxq3MYViATSCgWtGiEns5UIo"
+        "Ref": "HealthLambdaVersionEx7KPIFD18vIMMSg2l1L2Z1qwQCvsRoOoSQd1CwAAE"
       },
       "Export": {
         "Name": "sls-api-tts-dev-HealthLambdaFunctionQualifiedArn"
@@ -590,7 +593,7 @@
     "V1DescriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "V1DescriptionLambdaVersion0dd1ajbZHvYPWrK3R7Qyeyv0YoRwW9AQIN5nuIhc"
+        "Ref": "V1DescriptionLambdaVersionI59IIqdZgHiQnoFVOfz8WknRqbJSifOzaMZymPpeYY"
       },
       "Export": {
         "Name": "sls-api-tts-dev-V1DescriptionLambdaFunctionQualifiedArn"
@@ -599,7 +602,7 @@
     "PostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostLambdaVersionT2bCko2d3ezHnH8AHQirynSYuy9mz0fc9alyo2mvgE"
+        "Ref": "PostLambdaVersionoOV6n3IX07mkjo4j7lKMBAHcyDPKR9nXHj7c6BduM"
       },
       "Export": {
         "Name": "sls-api-tts-dev-PostLambdaFunctionQualifiedArn"
