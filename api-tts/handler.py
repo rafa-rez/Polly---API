@@ -66,9 +66,9 @@ def get_current_datetime():
     return formatted_datetime
 
 def post(event, context):
-    body = json.loads(event.get('body', '{}'))
-    
-    phrase = body.get('phrase', '')
+    params = event.get('queryStringParameters', {})
+    phrase = params.get('phrase', '')
+
     originalPhrase = phrase
     phrase = phrase.lower()
     
