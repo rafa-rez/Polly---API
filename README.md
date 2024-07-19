@@ -43,7 +43,8 @@ package.json                                      #
 README.md
 ```
 
-## 🏗️ Arquitetura do projeto
+## 🏗️ Arquitetura AWS
+![Imagem|Diagrama](assets/sprints6-7.jpg)
 
 ## 🚀 Como usar o sistema
 
