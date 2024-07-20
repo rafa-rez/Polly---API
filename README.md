@@ -6,6 +6,7 @@
  
 - [Descrição do Projeto](#-Descrição-do-Projeto)
 - [Desenvolvimento e escolha do tema](#-Desenvolvimento-e-escolha-do-tema)
+- [Intents utilizadas](#-Intents-utilizadas)
 - [Estrutura de pastas](#-Estrutura-de-pastas)
 - [Arquitetura AWS](#-Arquitetura-AWS)
 - [Como usar o sistema](#-Como-usar-o-sistema)
@@ -18,6 +19,16 @@
 Construir um chat bot com o Amazon Lex V2 e fazer o deploy em uma plataforma de mensageria.
 
 ## 🎯 Desenvolvimento e escolha do tema
+
+## ✔️ Intents utilizadas
+- <strong>WelcomeIntent</strong>: Intent inicial, apresentação do bot e das opções disponíveis "Vagas", "Canais de comunicação", "Sobre Nós".
+- <strong>JobsIntent</strong>: Intent de vagas do nosso chat bot que possibilita as ações "Consultar vagas" e "Candidatar-se em uma vaga".
+- <strong>ConsultJobIntent</strong>: Intent para consultar vagas disponíveis de acordo com as tags do departamento: "Fullstack Web Apps", "AI & ML", "Business Management", "Marketing".
+- <strong>AboutUsIntent</strong>: Fornece mais informações sobre a empresa Compass.
+- <strong>CommunicationChannelsIntent</strong>: Redes sociais e canais de comunicação para contato com a Compass.
+- <strong>RegisterJobIntent</strong>: Intent para cadastrar-se em uma vaga.
+-  <strong>FallbackIntent</strong>:
+- <strong>CancelIntent</strong>:
 
 ## 📂 Estrutura de pastas
  
