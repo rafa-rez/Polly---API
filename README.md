@@ -2,8 +2,8 @@
 
 ![Logo](https://s3.sa-east-1.amazonaws.com/remotar-assets-prod/company-profile-covers/cl7god9gt00lx04wg4p2a93zt.jpg)
 
+
 ## 📌 Índice
- 
 - [Descrição do Projeto](#-Descrição-do-Projeto)
 - [Desenvolvimento e escolha do tema](#-Desenvolvimento-e-escolha-do-tema)
 - [Intents utilizadas](#-Intents-utilizadas)
@@ -15,10 +15,13 @@
 - [Dificuldades encontradas](#-Dificuldades-encontradas)
 - [Autores](#-Autores)
 
+
 ## 📖 Descrição do Projeto
-Construir um chat bot com o Amazon Lex V2 e fazer o deploy em uma plataforma de mensageria.
+Construir um chat bot com livre escolha do tema, utilizando o Amazon Lex V2 e fazer o deploy em uma plataforma de mensageria. Além de integrar o AWS Lambda com o bot para funcionalidades mais elaboradas.
+
 
 ## 🎯 Desenvolvimento e escolha do tema
+
 
 ## ✔️ Intents utilizadas
 - <strong>WelcomeIntent</strong>: Intent inicial, apresentação do bot e das opções disponíveis "Vagas", "Canais de comunicação", "Sobre Nós".
@@ -31,6 +34,7 @@ Construir um chat bot com o Amazon Lex V2 e fazer o deploy em uma plataforma de 
 - <strong>ConverToAudioIntent</strong>: Faz a conversão de escrita para áudio.
 - <strong>FallbackIntent</strong>: Tratamento de erros.
 - <strong>CancelIntent</strong>: Cancelar um intent/reiniciar o bot.
+
 
 ## 📂 Estrutura de pastas
  
@@ -48,23 +52,37 @@ api-tts/                                          #
 ├─ gitignore.txt                                  # 
 ├─ handler.py                                     # 
 ├─ serveless.yml                                  #
-assets/                                           # 
-chatbot/                                          # 
-├─ CompassUolBot.zip                              # 
-.gitignore                                        # 
+assets/                                           # imagens utilizadas no Readme
+chatbot/                                          # armazenamento da última versão do bot .zip
 package-lock.json                                 # 
 package.json                                      # 
 README.md
 ```
 
+
 ## 🏗️ Arquitetura AWS
 ![Imagem|Diagrama](assets/sprints6-7.jpg)
 
+
 ## 🚀 Como usar o sistema
+
 
 ## 🏆 Experiências obtidas
 
+
 ## 💻 Tecnologias utilizadas
+1. Serviços AWS:
+    - AWS S3: Para armazenamento de dados.
+    - AWS Lambda: Salvar e puxar dados do S3. Integração do Lex com a API.
+    - AWS Lex: Criação do bot.
+    - AWS Polly: Transformar texto em áudio.
+    - DynamoDB: Banco de dados. Salvando os áudios gerados pela Polly.
+    - API Gateay: 
+
+2. Tecnologias utilizadas para programação:
+    - Python: Linguagem utilizada para toda a lógica da aplicação.
+    - Boto 3: AWS SDK para a comunicação da AWS com o Python.
+
 
 ## 🛠️ Dificuldades encontradas
 1. <strong>Integração do Lambda com o Amazon Lex</strong>:
@@ -72,6 +90,7 @@ Enfrentamos várias dificuldades com a integração. Desde compreender que o bot
     - Tínhamos várias ideias para integrar o Lambda com o Lex e explorar diversas funcionalidades adicionais, porém, devido ao tempo necessário para resolver a integração, não conseguimos implementar todas as propostas.
 2. <strong>Funcionalidades no Lex vs Slack</strong>:
 Enfrentamos um desafio ao perceber que algumas funcionalidades testadas exclusivamente no Lex não continuavam operacionais ao serem implementadas no Slack. Por exemplo, um botão que ainda funcionava no Lex após ser selecionado não operava corretamente no Slack.
+
 
 ## ✍🏻 Autores
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/120669342?v=4" width=115><br><sub>José Acerbi Almeida Neto</sub>](https://github.com/JoseJaan) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/142454135?v=4" width=115><br><sub>Lívia Marques Rodrigues</sub>](https://github.com/livmrqs) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/137515142?v=4" width=115><br><sub>Rafael Alves Silva Rezende</sub>](https://github.com/rafa-rez) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/123120658?v=4" width=115><br><sub>Samuel de Oliveira Vanoni</sub>](https://github.com/SamuVanoni)
