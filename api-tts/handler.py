@@ -14,8 +14,7 @@ table = dynamodb.Table(table_name)
 
 def health(event, context):
     body = {
-        "message": "Go Serverless v3.0! Your function executed successfully!",
-        #"input": event,
+        "message": "Go Serverless v4.1.10! Your function executed successfully!",
     }
 
     response = {"statusCode": 200, "body": json.dumps(body)}
