@@ -31,6 +31,7 @@ Construir um chat bot com livre escolha do tema, utilizando o Amazon Lex V2 e fa
 
 
 ## 🎯 Desenvolvimento e escolha do tema
+O chatbot foi desenvolvido na plataforma Lex, diretamente pelo console, e utilizamos conditional branching para controle de fluxo em quase todas as intents. O tema foi escolhido pensando em criar algo que pudesse ser útil para situações reais, oferecendo informações sobre vagas disponíveis na Compass UOL com base na área de interesse do usuário, facilitando o cadastro nas vagas e fornecendo detalhes sobre a empresa e seus canais de comunicação.
 
 
 ## ✔️ Intents utilizadas
