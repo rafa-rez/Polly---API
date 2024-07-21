@@ -5,6 +5,7 @@
 
 ## 📌 Índice
 - [Descrição do Projeto](#-Descrição-do-Projeto)
+- [Descrição da API](#-Descrição-da-API)
 - [Desenvolvimento e escolha do tema](#-Desenvolvimento-e-escolha-do-tema)
 - [Intents utilizadas](#-Intents-utilizadas)
 - [Estrutura de pastas](#-Estrutura-de-pastas)
@@ -18,6 +19,15 @@
 
 ## 📖 Descrição do Projeto
 Construir um chat bot com livre escolha do tema, utilizando o Amazon Lex V2 e fazer o deploy em uma plataforma de mensageria. Além de integrar o AWS Lambda com o bot para funcionalidades mais elaboradas.
+
+
+## 📖 Descrição da API
+- <strong>Inicialização do Projeto</strong>: Utilizando do passo a passo fornecido, implementamos as dependências necessárias para desenvolver as futuras aplicações.
+- <strong>Rota POST</strong>: Desenvolvimento da rota que permite que o usuário insira uma frase e tenha como retorno a mesa, uma URL com um aúdio da frase, a data de criação e um hash-code.
+    - <strong>Hash</strong>: Aplicamos a biblioteca 'hashlib' para desenvolvermos uma verificação de Id para cada frase gerada, na qual cada sentença enviada recebe um identificador único. Na ocasião em que a frase já se encontra no nosso banco de dados, o programa irá retornar a URL original, sem salvar novamente.
+    - <strong>DynamoDB</strong>: Utilizamos o DynamoDB para armazenarmos nossas infromações relacioandas as sentenças informadas, sendo elas: Id, Data de Criação, URL do S3 e a frase.
+    - <strong>Polly</strong>: A rota POST, tuiliza do arquivo Polly.py para transformar a frase recebida em um aúdio e armazenar em um bucket da S3.
+- <strong>Link da Rota</strong>: Segue o link para rota POST, a frase deve ser inserida após o símbolo de igualdade. https://s9uqg4t7c9.execute-api.us-east-1.amazonaws.com/v1/tts?phrase=
 
 
 ## 🎯 Desenvolvimento e escolha do tema
@@ -82,6 +92,7 @@ README.md
 2. Tecnologias utilizadas para programação:
     - Python: Linguagem utilizada para toda a lógica da aplicação.
     - Boto 3: AWS SDK para a comunicação da AWS com o Python.
+
 
 
 ## 🛠️ Dificuldades encontradas
