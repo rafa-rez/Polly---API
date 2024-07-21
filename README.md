@@ -111,6 +111,8 @@ Enfrentamos várias dificuldades com a integração. Desde compreender que o bot
     - Tínhamos várias ideias para integrar o Lambda com o Lex e explorar diversas funcionalidades adicionais, porém, devido ao tempo necessário para resolver a integração, não conseguimos implementar todas as propostas.
 2. <strong>Funcionalidades no Lex vs Slack</strong>:
 Enfrentamos um desafio ao perceber que algumas funcionalidades testadas exclusivamente no Lex não continuavam operacionais ao serem implementadas no Slack. Por exemplo, um botão que ainda funcionava no Lex após ser selecionado não operava corretamente no Slack.
+3. <strong>Converter o texto para áudio</strong>:
+Encontramos outra dificuldade ao tentar obter o texto da mensagem anterior enviada pelo bot para poder retorná-lo ao usuário em formato de áudio. Como sabíamos como implementar a parte do áudio, mas não a captura de texto, oferecemos uma funcionalidade alternativa: o usuário digita o que deseja converter em áudio, e utilizamos a função Lambda da AWS com a API da parte 1 para realizar essa conversão.
 
 
 ## ✍🏻 Autores
