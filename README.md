@@ -74,12 +74,25 @@ README.md
 1. Pré-requisitos:
     - Python instalado
     - Conta Slack
+    - AWS CLI configurado
 2. Clone o repositório:
     ```bash
     git clone -b grupo-1 https://github.com/Compass-pb-aws-2024-ABRIL/sprints-6-7-pb-aws-abril.git
     cd sprints-6-7-pb-aws-abril
+    git checkout grupo-1
     ```
-3. Como rodar:
+3. Variáveis de ambiente:
+    - Adicione em um arquivo .env as seguintes variáveis:
+        - DYNAMOTABLENAME
+        - S3BUCKETNAME
+
+4. Executando a API:
+    - Acesse a pasta `api-tts` e execute o seguinte comando:
+    ```bash
+    serverless deploy  
+    ```
+
+5. Como rodar:
     - Crie uma lambda e coloque o código que está no arquivo lambda.py.
     - Crie uma camada no lambda para conseguir importar a biblioteca httpx para o lambda.
     - Adicione essa camada no lambda criado anteriormente.
