@@ -1,4 +1,4 @@
-<h1 align="center">Título</h1>
+<h1 align="center">Compass Uol Bot</h1>
 
 ![Logo](https://s3.sa-east-1.amazonaws.com/remotar-assets-prod/company-profile-covers/cl7god9gt00lx04wg4p2a93zt.jpg)
 
@@ -7,14 +7,14 @@
 - [Descrição do Projeto](#-Descrição-do-Projeto)
 - [Descrição da API](#-Descrição-da-API)
 - [Desenvolvimento e escolha do tema](#-Desenvolvimento-e-escolha-do-tema)
-- [Intents utilizadas](#-Intents-utilizadas)
+- [Intents utilizadas](#️-intents-utilizadas)
 - [Estrutura de pastas](#-Estrutura-de-pastas)
-- [Arquitetura AWS](#-Arquitetura-AWS)
-- [Como usar o sistema](#-Como-usar-o-sistema)
-- [Experiências obtidas](#-Experiências-obtidas)
-- [Tecnologias utilizadas](#-Tecnologias-utilizadas)
-- [Dificuldades encontradas](#-Dificuldades-encontradas)
-- [Autores](#-Autores)
+- [Arquitetura AWS](#️-arquitetura-aws)
+- [Como usar o sistema](#-como-usar-o-sistema)
+- [Experiências obtidas](#-experiências-obtidas)
+- [Tecnologias utilizadas](#-tecnologias-utilizadas)
+- [Dificuldades encontradas](#️-dificuldades-encontradas)
+- [Autores](#-autores)
 
 
 ## 📖 Descrição do Projeto
@@ -49,23 +49,19 @@ Construir um chat bot com livre escolha do tema, utilizando o Amazon Lex V2 e fa
 ## 📂 Estrutura de pastas
  
 ```bash
-api-tts/                                          # 
-├─ .serveless/                                    # 
-├─├─ api-tts.zip                                  # 
-├─├─ cloudformation-template-create-slack.json    # 
-├─├─ cloudformation-template-update-stack.json    # 
-├─├─ meta.json                                    # 
-├─├─ serverless-state.json                        # 
-├─ scripts/                                       # 
-├─├─ polly.py                                     # 
-├─ README.md                                      # 
-├─ gitignore.txt                                  # 
-├─ handler.py                                     # 
-├─ serveless.yml                                  #
+api-tts/                                          # lógica da aplicação serveless
+├─ .serveless/                                    # arquivos de config do serveless
+├─├─ api-tts.zip                                  
+├─├─ cloudformation-template-create-slack.json    
+├─├─ cloudformation-template-update-stack.json    
+├─├─ meta.json                                    
+├─├─ serverless-state.json                        
+├─ scripts/                                       # script para converter texto em áudio
+├─├─ polly.py                                     
+├─ handler.py                                     # integração com o banco de dados
+├─ serveless.yml                                  # configuração serveless
 assets/                                           # imagens utilizadas no Readme
-chatbot/                                          # armazenamento da última versão do bot .zip
-package-lock.json                                 # 
-package.json                                      # 
+chatbot/                                          # arquivos necessários para rodas o bot
 README.md
 ```
 
@@ -75,6 +71,21 @@ README.md
 
 
 ## 🚀 Como usar o sistema
+1. Pré-requisitos:
+    - Python instalado
+    - Conta Slack
+2. Clone o repositório:
+    ```bash
+    git clone -b grupo-1 https://github.com/Compass-pb-aws-2024-ABRIL/sprints-6-7-pb-aws-abril.git
+    cd sprints-6-7-pb-aws-abril
+    ```
+3. Como rodar:
+    - Crie uma lambda e coloque o código que está no arquivo lambda.py.
+    - Crie uma camada no lambda para conseguir importar a biblioteca httpx para o lambda.
+    - Adicione essa camada no lambda criado anteriormente.
+    - Faça o upload do arquivo .zip do bot encontrado na pasta 'chatbot' do projeto para o Amazon Lex V2 e execute a compilação do bot.
+    - Vincule a lambda criada anteriormente ao bot.
+    - Após isso crie uma conta no Slack e integre o bot Lex nele.
 
 
 ## 🏆 Experiências obtidas
@@ -87,12 +98,11 @@ README.md
     - AWS Lex: Criação do bot.
     - AWS Polly: Transformar texto em áudio.
     - DynamoDB: Banco de dados. Salvando os áudios gerados pela Polly.
-    - API Gateay: 
+    - API Gateway: Realizar a parte de API da aplicação.
 
 2. Tecnologias utilizadas para programação:
     - Python: Linguagem utilizada para toda a lógica da aplicação.
     - Boto 3: AWS SDK para a comunicação da AWS com o Python.
-
 
 
 ## 🛠️ Dificuldades encontradas
