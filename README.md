@@ -72,6 +72,7 @@ README.md
 
 
 ## 🚀 Como usar o sistema
+[Link](https://slack.com/oauth/v2/authorize?client_id=7467454754689.7452698991717&scope=chat:write,team:read,im:history&user_scope=) para testes
 1. Pré-requisitos:
     - Python instalado
     - Conta Slack
