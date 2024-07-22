@@ -62,7 +62,7 @@ api-tts/                                          # lógica da aplicação serve
 ├─ handler.py                                     # integração com o banco de dados
 ├─ serveless.yml                                  # configuração serveless
 assets/                                           # imagens utilizadas no Readme
-chatbot/                                          # arquivos necessários para rodas o bot
+chatbot/                                          # arquivos necessários para rodar o bot
 README.md
 ```
 
@@ -103,6 +103,14 @@ README.md
 
 
 ## 🏆 Experiências obtidas
+Durante o projeto pudemos ter a experiência de desenvolver nossas habilidades de comunicação e trabalho em equipe e também, aprimorar nossas habilidades em diversas novas tecnologias, destacamos:
+- O uso de lambda para armazenar dados relacionados ao chatbot, como logs de conversação e arquivos de configuração. 
+- Experiência em configurar buckets S3 e gerenciar permissões de acesso para garantir a segurança dos dados.
+- Banco de dados NoSQL usado para armazenar informações estruturadas, como dados de usuários e logs de interação. 
+- Armazenamento dos áudios gerados pela Polly, permitindo uma recuperação rápida e eficiente.
+- Uso da biblioteca AWS SDK para Python, essencial para a comunicação entre os scripts Python e os serviços AWS.
+
+Essas experiências proporcionaram entendimento sobre a integração de serviços AWS para desenvolver soluções escaláveis e eficientes, além de aprimorar habilidades em programação Python e utilização de SDKs para automatizar e otimizar processos.
 
 
 ## 💻 Tecnologias utilizadas
